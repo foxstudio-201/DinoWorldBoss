@@ -1,0 +1,7 @@
+{
+  "itemGroup.dinoworldboss": "DinoWorldBoss",
+  "block.dinoworldboss.dinoworldboss_gate": "World Boss Gate",
+  "message.dinoworldboss.gate_teleport": "Entering %s...",
+  "message.dinoworldboss.gate_not_activated": "The gate is not activated.",
+  "message.dinoworldboss.gate_spawned": "§5§l[World Boss] §fThe gate to §e%s §fhas opened!"
+}
