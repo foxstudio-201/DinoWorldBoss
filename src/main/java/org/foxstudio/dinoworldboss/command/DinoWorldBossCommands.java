@@ -35,9 +35,18 @@ public final class DinoWorldBossCommands {
                 .requires(src -> src.hasPermission(2))
                 .then(Commands.literal("spawn")
                         .executes(ctx -> {
-                            DinoWorldBossScheduler.trySpawn(ctx.getSource().getServer());
-                            ctx.getSource().sendSuccess(() -> Component.literal("Đã thử spawn cổng ngẫu nhiên"), true);
-                            return 1;
+                            ResourceKey<Level> dim = CataclysmDimensions.ALL.get(
+                                    new java.util.Random().nextInt(CataclysmDimensions.ALL.size()));
+                            net.minecraft.core.BlockPos placed = DinoWorldBossScheduler.spawnForDimension(
+                                    ctx.getSource().getServer(), dim);
+                            if (placed != null) {
+                                ctx.getSource().sendSuccess(() -> Component.literal(
+                                        "§aĐã đặt cổng " + CataclysmDimensions.nameOf(dim)
+                                        + " tại " + placed.getX() + " " + placed.getY() + " " + placed.getZ()), true);
+                                return 1;
+                            }
+                            ctx.getSource().sendFailure(Component.literal("§cKhông đặt được cổng — chunk chưa generate hoặc structure lỗi."));
+                            return 0;
                         })
                         .then(Commands.argument("dimension", StringArgumentType.word())
                                 .executes(ctx -> {
@@ -48,8 +57,16 @@ public final class DinoWorldBossCommands {
                                                 + ". Chọn: " + String.join(", ", CataclysmDimensions.NAMES)));
                                         return 0;
                                     }
-                                    DinoWorldBossScheduler.spawnForDimension(ctx.getSource().getServer(), dim);
-                                    return 1;
+                                    net.minecraft.core.BlockPos placed = DinoWorldBossScheduler.spawnForDimension(
+                                            ctx.getSource().getServer(), dim);
+                                    if (placed != null) {
+                                        ctx.getSource().sendSuccess(() -> Component.literal(
+                                                "§aĐã đặt cổng " + name
+                                                + " tại " + placed.getX() + " " + placed.getY() + " " + placed.getZ()), true);
+                                        return 1;
+                                    }
+                                    ctx.getSource().sendFailure(Component.literal("§cKhông đặt được cổng — chunk chưa generate hoặc structure lỗi."));
+                                    return 0;
                                 }))
                         .then(Commands.literal("at")
                                 .then(Commands.argument("pos", BlockPosArgument.blockPos())

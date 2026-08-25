@@ -64,4 +64,21 @@ public final class CataclysmDimensions {
         }
         return key.location().getPath().replace("cataclysm_", "");
     }
+
+    public static String bossNameOf(ResourceKey<Level> key) {
+        if (key == null) {
+            return "unknown";
+        }
+        return switch (nameOf(key)) {
+            case "forge_of_aeons" -> "The Ancient Factory";
+            case "abyssal_depths" -> "Leviathan";
+            case "pharaohs_bane" -> "Cursed Pyramid Guardian";
+            case "eternal_frosthold" -> "Frosted Prison Warden";
+            case "sanctum_fallen" -> "Scylla";
+            case "souls_anvil" -> "Ancient Remnant";
+            case "infernos_maw" -> "Ignis";
+            case "bastion_lost" -> "The Harbinger";
+            default -> nameOf(key);
+        };
+    }
 }

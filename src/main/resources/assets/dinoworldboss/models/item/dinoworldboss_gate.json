@@ -1,3 +1,6 @@
 {
-  "parent": "dinoworldboss:block/dinoworldboss_gate"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dinoworldboss:block/dinogate"
+  }
 }

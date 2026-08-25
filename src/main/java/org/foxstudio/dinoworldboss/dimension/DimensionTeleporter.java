@@ -11,8 +11,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class DimensionTeleporter {
 
@@ -34,14 +38,21 @@ public final class DimensionTeleporter {
         Vec3 pos = findSpawnPos(target);
         player.teleportTo(target, pos.x, pos.y, pos.z, player.getYRot(), player.getXRot());
 
-        // slow fall 1 phút
         player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, SLOW_FALL_SECONDS * 20, 1, false, false));
-        player.sendSystemMessage(Component.literal("Chào mừng đến " + CataclysmDimensions.nameOf(dimKey)));
+        String dimName = dimensionId.getPath().replace("cataclysm_", "");
+        player.sendSystemMessage(Component.literal("§5[Thế Giới Boss] §fBạn đã vào §e" + dimName));
+    }
+
+    public static void teleportToPosition(ServerPlayer player, double x, double y, double z,
+                                          float yRot, float xRot) {
+        player.teleportTo(player.serverLevel(), x, y, z, yRot, xRot);
+        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 10 * 20, 0, false, false));
+        player.sendSystemMessage(Component.literal("§5[Thế Giới Boss] §fBạn đã trở về!"));
     }
 
     private static Vec3 findSpawnPos(ServerLevel level) {
         BlockPos origin = level.getSharedSpawnPos();
-        BlockPos top = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, origin);
+        BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, origin);
         double x = origin.getX() + 0.5D;
         double z = origin.getZ() + 0.5D;
         double y = Math.max(top.getY() + SPAWN_HEIGHT_OFFSET, 320);

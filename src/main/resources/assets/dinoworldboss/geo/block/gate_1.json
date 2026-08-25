@@ -1,0 +1,204 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "dinoworldboss:gate_1.geo.json",
+        "texture_width": 256,
+        "texture_height": 256,
+        "visible_bounds_width": 16,
+        "visible_bounds_height": 16,
+        "visible_bounds_offset": [
+          0,
+          1,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "portals_the_origin_gate_portal_void",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "middle_effect",
+          "parent": "portals_the_origin_gate_portal_void",
+          "pivot": [
+            0,
+            2,
+            -4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -84,
+                -82,
+                -4
+              ],
+              "size": [
+                168,
+                168,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    256,
+                    256
+                  ],
+                  "uv_rotation": 90
+                },
+                "east": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "south": {
+                  "uv": [
+                    256,
+                    0
+                  ],
+                  "uv_size": [
+                    -256,
+                    256
+                  ],
+                  "uv_rotation": 270
+                },
+                "west": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "hitbox",
+          "pivot": [
+            0,
+            4,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -73,
+                -69,
+                -23
+              ],
+              "size": [
+                146,
+                146,
+                46
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    46,
+                    47
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    45,
+                    43
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    46,
+                    46
+                  ]
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    45,
+                    45
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    46,
+                    47
+                  ],
+                  "uv_size": [
+                    -46,
+                    -47
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    44,
+                    47
+                  ],
+                  "uv_size": [
+                    -44,
+                    -47
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "dinoworldboss:gate_2.geo.json",
+        "texture_width": 256,
+        "texture_height": 256,
+        "visible_bounds_width": 46,
+        "visible_bounds_height": 45,
+        "visible_bounds_offset": [
+          0,
+          0.5,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "portals_the_origin_gate_portal_void",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "middle_effect2",
+          "parent": "portals_the_origin_gate_portal_void",
+          "pivot": [
+            0,
+            2,
+            -4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -84,
+                -82,
+                -4
+              ],
+              "size": [
+                168,
+                168,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    256,
+                    256
+                  ],
+                  "uv_rotation": 90
+                },
+                "east": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "south": {
+                  "uv": [
+                    256,
+                    0
+                  ],
+                  "uv_size": [
+                    -256,
+                    256
+                  ],
+                  "uv_rotation": 270
+                },
+                "west": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "middle_effect3",
+          "parent": "portals_the_origin_gate_portal_void",
+          "pivot": [
+            0,
+            2,
+            -4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -84,
+                -82,
+                -4
+              ],
+              "size": [
+                168,
+                168,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    256,
+                    256
+                  ],
+                  "uv_rotation": 90
+                },
+                "east": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "south": {
+                  "uv": [
+                    256,
+                    0
+                  ],
+                  "uv_size": [
+                    -256,
+                    256
+                  ],
+                  "uv_rotation": 270
+                },
+                "west": {
+                  "uv": [
+                    84,
+                    0
+                  ],
+                  "uv_size": [
+                    -84,
+                    0
+                  ],
+                  "uv_rotation": 270
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    84
+                  ],
+                  "uv_size": [
+                    0,
+                    -84
+                  ],
+                  "uv_rotation": 270
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

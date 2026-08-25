@@ -63,6 +63,8 @@ dependencies {
     compileOnly fg.deobf(files('libs/cataclysm_dimension-forge1.20.1-1.6.2.jar'))
     // L_Enders Cataclysm (base mod) - compile only
     compileOnly fg.deobf(files('libs/L_Enders_Cataclysm-3.31.jar'))
+    // GeckoLib for animated block model
+    implementation fg.deobf(files('libs/geckolib-forge-1.20.1-4.8.4.jar'))
 }
 
 tasks.named('processResources', ProcessResources).configure {

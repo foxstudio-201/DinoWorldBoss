@@ -1,0 +1,28 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"animation_length": 3,
+			"override_previous_animation": true,
+			"bones": {
+				"middle_effect4": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, -720]
+						}
+					},
+					"position": {
+						"vector": [0, 0, 18]
+					},
+					"scale": {
+						"vector": [2, 2, 2]
+					}
+				}
+			}
+		}
+	}
+}

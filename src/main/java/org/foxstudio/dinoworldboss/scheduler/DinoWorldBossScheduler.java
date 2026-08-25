@@ -20,8 +20,7 @@ import java.util.Random;
 public final class DinoWorldBossScheduler {
 
     private static final Random RANDOM = new Random();
-    private static int ticksSinceLastSpawn = 0;
-    private static final int SPAWN_INTERVAL_TICKS = 20 * 60 * 15; // 15 phút
+    private static long lastSpawnDay = -1;
     private static boolean enabled = true;
 
     private DinoWorldBossScheduler() {
@@ -35,44 +34,62 @@ public final class DinoWorldBossScheduler {
         if (!enabled) {
             return;
         }
-        ticksSinceLastSpawn++;
-        if (ticksSinceLastSpawn >= SPAWN_INTERVAL_TICKS) {
-            ticksSinceLastSpawn = 0;
-            trySpawn(event.getServer());
+        MinecraftServer server = event.getServer();
+        if (server == null || server.overworld() == null) {
+            return;
+        }
+        // dùng in-game day (24000 tick/ngày)
+        long day = server.overworld().getDayTime() / 24000L;
+        if (lastSpawnDay < 0) {
+            lastSpawnDay = day;
+            return;
+        }
+        int intervalDays = org.foxstudio.dinoworldboss.config.DinoWorldBossConfig.SPAWN_INTERVAL_MINUTES.get();
+        if (day - lastSpawnDay >= intervalDays) {
+            lastSpawnDay = day;
+            trySpawn(server);
         }
     }
 
     public static void trySpawn(MinecraftServer server) {
-        // chọn random dimension
         ResourceKey<Level> dimKey = CataclysmDimensions.ALL.get(RANDOM.nextInt(CataclysmDimensions.ALL.size()));
         spawnForDimension(server, dimKey);
     }
 
-    public static void spawnForDimension(MinecraftServer server, ResourceKey<Level> dimKey) {
+    /** @return BlockPos nơi đặt thành công, hoặc null nếu thất bại */
+    public static net.minecraft.core.BlockPos spawnForDimension(MinecraftServer server, ResourceKey<Level> dimKey) {
         ServerLevel overworld = server.overworld();
-        // random position
-        int x = (RANDOM.nextInt(200) - 100) * 16; // -1600 to 1600 by 16
+        int x = (RANDOM.nextInt(200) - 100) * 16;
         int z = (RANDOM.nextInt(200) - 100) * 16;
+        net.minecraft.core.BlockPos origin = new net.minecraft.core.BlockPos(x, 64, z);
+
+        var chunk = overworld.getChunk(x >> 4, z >> 4);
+        if (!chunk.getStatus().isOrAfter(net.minecraft.world.level.chunk.ChunkStatus.FULL)) {
+            return null;
+        }
+
         int y = overworld.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 new net.minecraft.core.BlockPos(x, 0, z)).getY();
-
-        net.minecraft.core.BlockPos origin = new net.minecraft.core.BlockPos(x, y, z);
-        if (origin.getY() < 64) {
-            origin = new net.minecraft.core.BlockPos(x, 64, z);
+        if (y < 64) {
+            y = 64;
         }
+        origin = new net.minecraft.core.BlockPos(x, y, z);
 
-        boolean placed = DinoWorldBossStructurePlacer.place(overworld, origin,
-                dimKey.location());
+        boolean placed = DinoWorldBossStructurePlacer.place(overworld, origin, dimKey.location());
 
         if (placed) {
-            String name = CataclysmDimensions.nameOf(dimKey);
-            Component msg = Component.literal("§5§l[Thế Giới Boss] §fCánh cổng §e" + name
-                    + " §fđã mở tại §a" + origin.getX() + " " + origin.getY() + " " + origin.getZ()
-                    + " §ftrong §aOverworld");
+            String bossName = CataclysmDimensions.bossNameOf(dimKey);
+            String msg = org.foxstudio.dinoworldboss.config.DinoMessageFormatter.format(
+                    org.foxstudio.dinoworldboss.config.DinoWorldBossConfig.SPAWN_MESSAGE.get(),
+                    bossName, null,
+                    String.valueOf(origin.getX()), String.valueOf(origin.getY()), String.valueOf(origin.getZ()));
+            Component component = net.minecraft.network.chat.Component.literal(msg);
             for (ServerPlayer p : server.getPlayerList().getPlayers()) {
-                p.sendSystemMessage(msg);
+                p.sendSystemMessage(component);
             }
+            return origin;
         }
+        return null;
     }
 
     public static void setEnabled(boolean e) {
@@ -80,6 +97,6 @@ public final class DinoWorldBossScheduler {
     }
 
     public static void resetTimer() {
-        ticksSinceLastSpawn = 0;
+        lastSpawnDay = -1;
     }
 }

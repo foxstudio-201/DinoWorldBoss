@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "dinoworldboss:block/dinoworldboss_gate"
+    },
+    "facing=south": {
+      "model": "dinoworldboss:block/dinoworldboss_gate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dinoworldboss:block/dinoworldboss_gate",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "dinoworldboss:block/dinoworldboss_gate",
+      "y": 90
     }
   }
 }
